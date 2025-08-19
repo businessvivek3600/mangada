@@ -1,0 +1,41 @@
+name: madhang
+description: "Bring the taste of Indonesian food right to your doorstep!"
+
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0-323.2.beta
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  liquid_swipe: ^3.1.0
+  font_awesome_flutter: ^10.9.1
+  get_storage: ^2.1.1
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
+  permission_handler: ^12.0.1
+  google_maps_flutter: ^2.12.3
+  google_fonts: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+ 
+
+
