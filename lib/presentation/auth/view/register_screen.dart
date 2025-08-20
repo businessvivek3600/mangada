@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/app_text_field.dart';
-import '../../widgets/custom_button.dart';
+import '../../../shared/widgets/app_text_field.dart';
+import '../../../shared/widgets/custom_button.dart';
 import 'login_screen.dart';
 import 'otp_verification_screen.dart';
 

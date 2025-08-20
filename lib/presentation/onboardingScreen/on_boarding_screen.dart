@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:madhang/screens/auth/login_screen.dart';
-import '../../widgets/custom_button.dart';
+import '../../shared/widgets/custom_button.dart';
+import '../auth/view/login_screen.dart';
 
 
 class OnboardingScreen extends StatefulWidget {

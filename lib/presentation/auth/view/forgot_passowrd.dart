@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:madhang/screens/auth/register_screen.dart';
-
-import '../../widgets/app_text_field.dart';
-import '../../widgets/custom_button.dart';
+import '../../../shared/widgets/app_text_field.dart';
+import '../../../shared/widgets/custom_button.dart';
 import 'check_mailbox_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {

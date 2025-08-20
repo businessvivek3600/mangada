@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../utils/colors..dart';
+import '../constants/colors..dart';
+
 
 
 
@@ -115,7 +116,7 @@ class ThemeService extends GetxService with WidgetsBindingObserver {
   ThemeData get darkTheme => ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.primary900,
-    scaffoldBackgroundColor: AppColors.gray950,
+    scaffoldBackgroundColor: AppColors.gray900,
     colorScheme: const ColorScheme.dark(
       primary: AppColors.primary900,
       background: Colors.black,

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:madhang/screens/auth/register_screen.dart';
-import 'package:madhang/screens/onboardingScreen/on_boarding_screen.dart';
-import 'package:madhang/services/theme_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'controllers/theme_controller.dart';
-import 'screens/home/home_page.dart';
-import 'screens/splash/splash_screen.dart';
+import 'core/services/theme_service.dart';
+import 'presentation/auth/view/register_screen.dart';
+import 'presentation/home/view/home_page.dart';
+import 'presentation/onboardingScreen/on_boarding_screen.dart';
+import 'presentation/splash/splash_screen.dart';
 
 
 void main() async {

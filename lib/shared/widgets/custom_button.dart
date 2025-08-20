@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:madhang/utils/colors..dart';
+import 'package:madhang/core/constants/colors..dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -73,7 +73,6 @@ Widget customOutlinedButton(
           Text(
             text,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
             ),
           ),
         ],

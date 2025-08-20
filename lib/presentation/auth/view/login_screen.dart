@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:madhang/screens/auth/register_screen.dart';
-import 'package:madhang/screens/home/home_page.dart';
+import 'package:madhang/presentation/auth/view/register_screen.dart';
+import '../../../shared/widgets/app_text_field.dart';
+import '../../../shared/widgets/custom_button.dart';
 
-import '../../widgets/app_text_field.dart';
-import '../../widgets/custom_button.dart';
+import '../../main/view/main_screen.dart';
 import 'forgot_passowrd.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onRegister() {
-    Get.offAll(()=> const MyHomePage(),
+    Get.offAll(()=> const MainScreen(),
         transition: Transition.rightToLeftWithFade,
         duration: const Duration(milliseconds: 800));
   }
