@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import '../../../data/models/food_data_model.dart';
-import '../../home/widgets/food_card.dart';
-import '../../home/widgets/search_bar.dart'; // reuse your FoodCard widget
+
+import '../../../shared/widgets/common_card_widget.dart';
+import '../../../shared/widgets/search_bar.dart';
 
 class CategoryScreen extends StatelessWidget {
   final String categoryTitle;
@@ -43,7 +44,7 @@ class CategoryScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = items[index];
-                  return FoodCard(data: item);
+                  return HorizontalCard(data: item);
                 },
               ),
             ),

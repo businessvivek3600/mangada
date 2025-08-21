@@ -3,11 +3,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:madhang/core/constants/colors..dart';
 import '../../../data/models/food_data_model.dart';
-import '../../../shared/widgets/horizental_list_section.dart';
+import '../../../shared/widgets/horizontal_list_section.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../widgets/category_list.dart';
 import '../widgets/custom_sliver_appbar.dart';
-import '../widgets/search_bar.dart';
+import '../../../shared/widgets/search_bar.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -17,7 +17,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   String _currentLocation = "Loading...";
 
   @override
@@ -40,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (placemarks.isNotEmpty) {
         setState(() {
           _currentLocation =
-          "${placemarks.first.locality}, ${placemarks.first.country}";
+              "${placemarks.first.locality}, ${placemarks.first.country}";
         });
       }
     } catch (e) {
@@ -61,10 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
         slivers: [
           /// Collapsible AppBar
           CustomSliverAppBar(location: _currentLocation),
-SliverToBoxAdapter( child: SizedBox(height: size.height * 0.05),),
-          /// Search Bar
-          SliverToBoxAdapter(child: SearchBarWidget()),
+          SliverToBoxAdapter(child: SizedBox(height: size.height * 0.01)),
 
+          /// Search Bar
+          SliverToBoxAdapter(child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width * 0.04,
+            ),
+            child: SearchBarWidget(),
+          )),
+          SliverToBoxAdapter(child: SizedBox(height: size.height * 0.01)),
           /// Categories
           SliverToBoxAdapter(
             child: CategoryList(
@@ -83,32 +88,7 @@ SliverToBoxAdapter( child: SizedBox(height: size.height * 0.05),),
           ),
           SliverToBoxAdapter(
             child: HorizontalListSection(
-              items: [
-                FoodCardData(
-                  title: "Sate Padang",
-                  subtitle: "Sate Pak Maman",
-                  price: 2.0,
-                  oldPrice: 3.0,
-                  rating: 4.9,
-                  reviews: 115,
-                ),
-                FoodCardData(
-                  title: "Nasi Liwet",
-                  subtitle: "Resto Mbok Jiah",
-                  price: 3.0,
-                  oldPrice: 5.0,
-                  rating: 4.9,
-                  reviews: 115,
-                ),
-                FoodCardData(
-                  title: "Gudeg",
-                  subtitle: "Gudeg Mbok Yem",
-                  price: 4.0,
-                  oldPrice: 5.0,
-                  rating: 4.0,
-                  reviews: 200,
-                ),
-              ],
+              items: items,
             ),
           ),
 
@@ -116,32 +96,7 @@ SliverToBoxAdapter( child: SizedBox(height: size.height * 0.05),),
           SliverToBoxAdapter(child: SectionHeader(title: "Near You")),
           SliverToBoxAdapter(
             child: HorizontalListSection(
-              items: [
-                FoodCardData(
-                  title: "Gudeg",
-                  subtitle: "Gudeg Mbok Jum",
-                  price: 4.0,
-                  oldPrice: 3.5,
-                  rating: 4.9,
-                  reviews: 115,
-                ),
-                FoodCardData(
-                  title: "Sate Padang",
-                  subtitle: "Sate Pak Maman",
-                  price: 2.0,
-                  oldPrice: 3.0,
-                  rating: 4.9,
-                  reviews: 115,
-                ),
-                FoodCardData(
-                  title: "Nasi Liwet",
-                  subtitle: "Resto Mbok Jiah",
-                  price: 3.0,
-                  oldPrice: 5.0,
-                  rating: 4.9,
-                  reviews: 115,
-                ),
-              ],
+              items: items,
             ),
           ),
 

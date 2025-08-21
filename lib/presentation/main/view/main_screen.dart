@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:madhang/core/constants/colors..dart';
 import 'package:madhang/presentation/discover/view/discover_screen.dart';
 import 'package:madhang/presentation/home/view/home_page.dart';
@@ -12,11 +12,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
+  final _controller = NotchBottomBarController(index: 0);
+  final PageController _pageController = PageController(initialPage: 0);
 
   final List<Widget> _pages = const [
     MyHomePage(),
-   DiscoverScreen(),
+    DiscoverScreen(),
     Center(child: Text("Cart Page")),
     Center(child: Text("Orders Page")),
     Center(child: Text("Profile Page")),
@@ -25,20 +26,49 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        selectedItemColor: AppColors.primary900,
-        unselectedItemColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: "Discover"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: "My Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: "Orders"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+      extendBody: true,
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _pages,
+      ),
+      bottomNavigationBar: AnimatedNotchBottomBar(
+        notchBottomBarController: _controller,
+        color: Colors.white,
+        showLabel: true,
+        notchColor: AppColors.primary900,
+        kIconSize: 24.0,
+        kBottomRadius: 20.0,
+        itemLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+        onTap: (index) {
+          _pageController.jumpToPage(index);
+        },
+        bottomBarItems: const [
+          BottomBarItem(
+            inActiveItem: Icon(Icons.home, color: Colors.grey),
+            activeItem: Icon(Icons.home, color: Colors.white),
+            itemLabel: 'Home',
+          ),
+          BottomBarItem(
+            inActiveItem: Icon(Icons.explore, color: Colors.grey),
+            activeItem: Icon(Icons.explore, color: Colors.white),
+            itemLabel: 'Discover',
+          ),
+          BottomBarItem(
+            inActiveItem: Icon(Icons.shopping_bag,  color: Colors.grey),
+            activeItem: Icon(Icons.shopping_bag, color: Colors.white),
+            itemLabel: 'My Cart',
+          ),
+          BottomBarItem(
+            inActiveItem: Icon(Icons.restaurant,  color: Colors.grey),
+            activeItem: Icon(Icons.restaurant, color: Colors.white),
+            itemLabel: 'Orders',
+          ),
+          BottomBarItem(
+            inActiveItem: Icon(Icons.person,  color: Colors.grey),
+            activeItem: Icon(Icons.person, color: Colors.white),
+            itemLabel: 'Profile',
+          ),
         ],
       ),
     );
