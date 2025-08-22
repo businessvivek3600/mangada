@@ -17,15 +17,15 @@ class SearchBarWidget extends StatelessWidget {
           color: isDark ? AppColors.gray800 : Colors.white,
           borderRadius: BorderRadius.circular(30),
           border: Border.all(
-            color: isDark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.05),
+            color: isDark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1),
           ),
           boxShadow: [
             BoxShadow(
               color: isDark
                   ? Colors.white.withOpacity(0.1)
                   : Colors.black.withOpacity(0.05),
-              blurRadius: 6,
-              offset: const Offset(0, 3),
+              blurRadius: 1,
+              offset: const Offset(0, 0),
             ),
           ],
         ),

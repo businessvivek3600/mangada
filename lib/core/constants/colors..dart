@@ -67,6 +67,3 @@ class AppColors {
   static const Color danger900 = Color(0xFFf5322);
   static const Color danger950 = Color(0xFFf41f1f);
 }
-
-
-

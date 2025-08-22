@@ -25,6 +25,13 @@ class _RestaurantsListScreenState extends State<RestaurantsListScreen> {
         surfaceTintColor: Colors.transparent,
         title: Text("Restaurants", style: textTheme.titleLarge),
         centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            height: 1,
+            color: Colors.grey.shade300,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

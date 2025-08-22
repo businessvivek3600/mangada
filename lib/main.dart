@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
    return Obx(() => GetMaterialApp(
       debugShowCheckedModeBanner: false,
      theme: themeService.lightTheme,
-     darkTheme: themeService.darkTheme,
+     // darkTheme: themeService.darkTheme,
      themeMode: themeService.themeMode,
       home: const SplashScreen(),
       getPages: [

@@ -23,7 +23,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     {"type": "image", "path": "assets/images/banner2.png"},
     {"type": "image", "path": "assets/images/banner3.png"},
     {"type": "gif", "path": "assets/gif/1666098039939.gif"},
-    {"type": "video", "path": "assets/video/vi.mp4"},
+    {"type": "video", "path": "assets/video/1104284249-preview.mp4"},
   ];
 
   final Random random = Random();

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:madhang/core/constants/colors..dart';
+import 'package:madhang/presentation/cart/view/my_carrt_screen.dart';
 import 'package:madhang/presentation/discover/view/discover_screen.dart';
 import 'package:madhang/presentation/home/view/home_page.dart';
+
+import '../../food/view/food_order_screen.dart';
+import '../../profile/view/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,9 +22,9 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = const [
     MyHomePage(),
     DiscoverScreen(),
-    Center(child: Text("Cart Page")),
-    Center(child: Text("Orders Page")),
-    Center(child: Text("Profile Page")),
+    MyCartScreen(),
+    FoodOrderScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -39,7 +43,10 @@ class _MainScreenState extends State<MainScreen> {
         notchColor: AppColors.primary900,
         kIconSize: 24.0,
         kBottomRadius: 20.0,
-        itemLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+        itemLabelStyle: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
         onTap: (index) {
           _pageController.jumpToPage(index);
         },
@@ -55,17 +62,17 @@ class _MainScreenState extends State<MainScreen> {
             itemLabel: 'Discover',
           ),
           BottomBarItem(
-            inActiveItem: Icon(Icons.shopping_bag,  color: Colors.grey),
+            inActiveItem: Icon(Icons.shopping_bag, color: Colors.grey),
             activeItem: Icon(Icons.shopping_bag, color: Colors.white),
             itemLabel: 'My Cart',
           ),
           BottomBarItem(
-            inActiveItem: Icon(Icons.restaurant,  color: Colors.grey),
+            inActiveItem: Icon(Icons.restaurant, color: Colors.grey),
             activeItem: Icon(Icons.restaurant, color: Colors.white),
             itemLabel: 'Orders',
           ),
           BottomBarItem(
-            inActiveItem: Icon(Icons.person,  color: Colors.grey),
+            inActiveItem: Icon(Icons.person, color: Colors.grey),
             activeItem: Icon(Icons.person, color: Colors.white),
             itemLabel: 'Profile',
           ),
