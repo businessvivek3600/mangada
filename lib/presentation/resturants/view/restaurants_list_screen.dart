@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:madhang/shared/widgets/vertical_list_section.dart';
 
-import '../../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 import '../../../shared/widgets/horizontal_list_section.dart';
 import '../../../shared/widgets/search_bar.dart';
 import '../../../shared/widgets/section_header.dart';

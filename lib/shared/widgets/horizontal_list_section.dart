@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 import 'common_card_widget.dart';
 
 class HorizontalListSection extends StatelessWidget {

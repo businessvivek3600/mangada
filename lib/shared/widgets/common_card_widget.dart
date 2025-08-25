@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:madhang/core/constants/colors..dart';
-import '../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 import '../../presentation/food/view/food_details_screen.dart';
 
 import '../../presentation/resturants/view/restaurant_details_screen.dart';

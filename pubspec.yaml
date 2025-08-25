@@ -28,6 +28,25 @@ dependencies:
   carousel_slider: ^5.1.1
   iconsax: ^0.0.8
   easy_stepper: ^0.8.5+1
+  version: ^3.0.2
+  nb_utils: ^7.1.7+2
+  flutter_upgrade_version: ^1.1.8
+  url_launcher: ^6.3.2
+  dio: ^5.9.0
+  firebase_messaging: ^16.0.0
+  flutter_custom_tabs: ^2.4.0
+  html: ^0.15.6
+  intl: ^0.20.2
+  image_picker: ^1.2.0
+  open_file: ^3.5.10
+  logger: ^2.6.1
+  device_info_plus: ^11.3.0
+  rive: ^0.13.20
+  flutter_svg: ^2.2.0
+  cached_network_image: ^3.4.1
+  auto_size_text: ^3.0.0
+  flutter_linkify: ^6.0.0
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:

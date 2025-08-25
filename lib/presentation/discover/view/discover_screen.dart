@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:madhang/presentation/resturants/view/restaurants_list_screen.dart';
 import 'package:video_player/video_player.dart';
 import '../../../core/constants/colors..dart';
-import '../../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
+
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/horizontal_list_section.dart';
 import '../../../shared/widgets/search_bar.dart';

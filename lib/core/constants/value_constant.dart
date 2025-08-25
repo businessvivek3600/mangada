@@ -1,0 +1,5 @@
+
+
+const DEFFAULT_PADDING = 16.0;
+const DEFFAULT_RADIUS = 8.0;
+const DEFAULT_ELEVATION = 2.0;

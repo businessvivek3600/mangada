@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors..dart';
-import '../../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 
 
 class FoodDetailScreen extends StatefulWidget {

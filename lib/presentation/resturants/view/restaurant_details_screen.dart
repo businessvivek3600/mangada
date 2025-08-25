@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:madhang/core/constants/colors..dart';
-import '../../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 import '../../../shared/widgets/vertical_list_section.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {

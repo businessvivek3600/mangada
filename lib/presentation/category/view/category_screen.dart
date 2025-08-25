@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 
 import '../../../shared/widgets/common_card_widget.dart';
 import '../../../shared/widgets/search_bar.dart';

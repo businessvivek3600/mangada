@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:madhang/core/constants/colors..dart';
-import '../../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 import '../../../shared/widgets/horizontal_list_section.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../widgets/category_list.dart';

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:madhang/shared/widgets/common_card_widget.dart';
-import '../../data/models/food_data_model.dart';
+import '../../../core/data/models/food_data_model.dart';
 
 class VerticalListSection extends StatelessWidget {
   final List<FoodCardData> items;
