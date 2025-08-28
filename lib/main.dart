@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:madhang/core/constants/api_constant.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'core/data/database/dio/dio/dio_client.dart';
+import 'core/data/database/dio/dio/logging_interceptor.dart';
 import 'core/services/theme_service.dart';
-import 'presentation/auth/view/register_screen.dart';
-import 'presentation/home/view/home_page.dart';
-import 'presentation/onboardingScreen/on_boarding_screen.dart';
-import 'presentation/splash/splash_screen.dart';
+import 'routes/route_settings.dart';
 
-
+late DioClient dioClient;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-
+  dioClient = DioClient(
+   ApiConstants.baseUrl,
+    null,
+    loggingInterceptor: LoggingInterceptor(),
+  );
+  Get.put<DioClient>(dioClient);
   // Request location permission at startup
   await _requestPermissions();
   runApp(const MyApp());
@@ -31,18 +36,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeService themeService = Get.put(ThemeService());
-   return Obx(() => GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-     theme: themeService.lightTheme,
-     // darkTheme: themeService.darkTheme,
-     themeMode: themeService.themeMode,
-      home: const SplashScreen(),
-      getPages: [
-        GetPage(name: '/onboarding', page: () => OnboardingScreen()),
-        GetPage(name: '/register', page: () => RegisterScreen()),
-        GetPage(name: '/home', page: () => const MyHomePage()),
 
-      ],
+    return Obx(() => MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: themeService.lightTheme,
+      // darkTheme: themeService.darkTheme,
+      themeMode: themeService.themeMode,
+      routerConfig: router,
     ));
   }
 }

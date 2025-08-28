@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:madhang/core/constants/colors..dart';
 
 import '../../../shared/widgets/search_bar.dart';
-import 'food_order_details.dart';
+import 'order_details.dart';
 
 class FoodOrderScreen extends StatelessWidget {
   const FoodOrderScreen({super.key});

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:madhang/core/constants/colors..dart';
+import 'package:madhang/routes/route_name.dart';
 import '../../../core/data/models/food_data_model.dart';
-import '../../presentation/food/view/food_details_screen.dart';
-
 import '../../presentation/resturants/view/restaurant_details_screen.dart';
+
 
 class HorizontalCard extends StatelessWidget {
   final FoodCardData data;
@@ -20,10 +21,7 @@ class HorizontalCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => FoodDetailScreen(data: data)),
-        );
+        context.pushNamed(Routes.foodDetail, extra: data);
       },
       child: Container(
         width: width * 0.45,
@@ -128,10 +126,7 @@ class HorizontalCard2 extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => FoodDetailScreen(data: data)),
-        );
+        context.pushNamed(Routes.foodDetail, extra: data);
       },
       child: Container(
         width: width * 0.63,

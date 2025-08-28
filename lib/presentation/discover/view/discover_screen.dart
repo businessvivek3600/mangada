@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:madhang/presentation/resturants/view/restaurants_list_screen.dart';
+
 import 'package:video_player/video_player.dart';
 import '../../../core/constants/colors..dart';
 import '../../../core/data/models/food_data_model.dart';
@@ -10,6 +10,7 @@ import '../../../core/data/models/food_data_model.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/horizontal_list_section.dart';
 import '../../../shared/widgets/search_bar.dart';
+import '../../resturants/view/restaurants_list_screen.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});

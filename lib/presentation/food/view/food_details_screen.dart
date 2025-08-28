@@ -16,7 +16,7 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
   String selectedVariant = "Regular"; // default variant
   int quantity = 1;
   bool isExpanded = false;
-
+  bool isAddedToCart = false;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -199,68 +199,66 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
           child: Row(
             children: [
               /// 🔹 Quantity Control (like your design)
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 8),
-                  decoration: BoxDecoration(
-                    color: AppColors.danger100, // light red background
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Minus Button
-                      InkWell(
-                        onTap: () {
-                          if (quantity > 1) {
-                            setState(() => quantity--);
-                          }
-                        },
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          width: 36,
-                          height: 36,
-                          decoration: BoxDecoration(
-                            color: AppColors.danger400, // lighter red
-                            shape: BoxShape.circle,
+              if (isAddedToCart) ...[
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.danger100,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Minus
+                        InkWell(
+                          onTap: () {
+                            if (quantity > 1) {
+                              setState(() => quantity--);
+                            }
+                          },
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: AppColors.danger400,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.remove,
+                                color: Colors.white, size: 20),
                           ),
-                          child: const Icon(Icons.remove,
-                              color: Colors.white, size: 20),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-
-                      // Quantity Text
-                      Text(
-                        quantity.toString(),
-                        style: textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.danger700,
-                        ),
-                      ),
-
-                      const SizedBox(width: 12),
-
-                      // Plus Button
-                      InkWell(
-                        onTap: () => setState(() => quantity++),
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          width: 36,
-                          height: 36,
-                          decoration: const BoxDecoration(
-                            color: AppColors.danger950, // solid red
-                            shape: BoxShape.circle,
+                        const SizedBox(width: 12),
+                        Text(
+                          quantity.toString(),
+                          style: textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.danger700,
                           ),
-                          child: const Icon(Icons.add,
-                              color: Colors.white, size: 20),
                         ),
-                      ),
-                    ],
+                    Spacer(),
+                        // Plus
+                        InkWell(
+                          onTap: () => setState(() => quantity++),
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: const BoxDecoration(
+                              color: AppColors.danger950,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.add,
+                                color: Colors.white, size: 20),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              ],
               const SizedBox(width: 16),
 
               /// 🔹 Add to Cart button
@@ -275,11 +273,19 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                     ),
                   ),
                   onPressed: () {
-                    debugPrint(
-                        "Added ${widget.data.title} - $selectedVariant x$quantity to Cart");
+                    if (!isAddedToCart) {
+                      // First time press -> Add to cart
+                      setState(() => isAddedToCart = true);
+                      debugPrint(
+                          "Added ${widget.data.title} - $selectedVariant x$quantity to Cart");
+                    } else {
+                      // After added -> Buy now action
+                      debugPrint("Buying ${widget.data.title} - $selectedVariant x$quantity");
+                      // Navigate to checkout here
+                    }
                   },
                   child: Text(
-                    "Add to Cart",
+                    isAddedToCart ? "Buy Now" : "Add to Cart", // 👈 change text
                     style: textTheme.titleMedium?.copyWith(color: Colors.white),
                   ),
                 ),

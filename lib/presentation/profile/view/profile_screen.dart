@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:madhang/core/constants/colors..dart';
+import 'package:madhang/routes/route_name.dart';
 
 import 'edit_profile.dart';
 
@@ -33,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                  Get.to(() => const EditProfileScreen());
+                  context.pushNamed(Routes.editProfile);
                   },
                   child: CircleAvatar(
                     radius: 16,
@@ -66,19 +68,18 @@ class ProfileScreen extends StatelessWidget {
                 child: const Text("4", style: TextStyle(color: Colors.white, fontSize: 12)),
               ),
             ),
-            _menuItem(context, icon: Iconsax.user_edit, label: "Edit Profile"),
             _menuItem(context, icon: Iconsax.card, label: "Payment"),
-            _menuItem(context, icon: Iconsax.setting, label: "Settings"),
-            _menuItem(context, icon: Iconsax.message_question, label: "Help Center"),
+            _menuItem(context, icon: Iconsax.setting, label: "Settings",onTap: () => context.pushNamed(Routes.settings),),
+            _menuItem(context, icon: Iconsax.message_question, label: "Help Center",onTap: () => context.pushNamed(Routes.helpCenter),),
             _menuItem(context, icon: Iconsax.security_safe, label: "Privacy Policy"),
-            _menuItem(context, icon: Iconsax.logout, label: "Logout"),
+            _menuItem(context, icon: Iconsax.logout, label: "Logout",onTap: () => context.goNamed(Routes.login),),
           ],
         ),
       ),
     );
   }
 
-  Widget _menuItem(BuildContext context, {required IconData icon, required String label, Widget? trailing}) {
+  Widget _menuItem(BuildContext context, {required IconData icon, required String label, Widget? trailing, VoidCallback? onTap,}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
@@ -86,6 +87,7 @@ class ProfileScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: ListTile(
+        onTap: onTap,
         leading: Icon(icon, size: 22, color: Colors.black),
         title: Text(label, style: Theme.of(context).textTheme.bodyMedium),
         trailing: trailing ?? const Icon(Iconsax.arrow_right_3, size: 20, color: Colors.black),

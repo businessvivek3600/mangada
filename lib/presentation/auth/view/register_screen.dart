@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../routes/route_name.dart';
 import '../../../shared/widgets/app_text_field.dart';
 import '../../../shared/widgets/custom_button.dart';
 import 'login_screen.dart';
@@ -27,9 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _onRegister() {
-    Get.to(() => const OtpVerificationScreen(),
-        transition: Transition.rightToLeftWithFade,
-        duration: const Duration(milliseconds: 800));
+    context.pushNamed(Routes.otpVerification);
 
   }
 
@@ -160,10 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: theme.textTheme.titleSmall),
                     TextButton(
                       onPressed: () {
-                        Get.offAll(() => const LoginScreen(),
-                          transition: Transition.leftToRightWithFade,
-                          duration: const Duration(milliseconds: 800),
-                        );
+                        context.goNamed(Routes.login);
                       },
                       child: const Text(
                         "Login",

@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 import 'package:madhang/core/constants/colors..dart';
 import 'package:madhang/shared/widgets/custom_button.dart';
+
+
+import '../../../shared/widgets/app_text_field.dart';
+import '../controller/setting_controller.dart';
+import 'settings_screen.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
@@ -9,135 +16,187 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final controller = Get.put(SettingsController());
 
-    return  Scaffold(
-      backgroundColor: Colors.white,
+    return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(height: 1, color: Colors.grey.shade300),
-        ),
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        title: const Text(
-          "Edit Profile",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
+        centerTitle: true,
+        title: Text("Profile", style: textTheme.titleMedium),
       ),
-      body:SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const SizedBox(height: 16),
-
             // Profile Avatar
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                const CircleAvatar(
-                  radius: 44,
-                  backgroundColor: Colors.grey,
-                  child: Icon(Iconsax.user, size: 48, color: Colors.white),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: const AssetImage(
+                    "assets/images/p1.png",
+                  ), // replace with NetworkImage if dynamic
+                  backgroundColor: Colors.grey.shade200,
                 ),
                 CircleAvatar(
-                  radius: 16,
-                  backgroundColor: AppColors.warning800,
+                  radius: 18,
+                  backgroundColor: AppColors.primary900,
                   child: const Icon(
                     Iconsax.edit,
-                    size: 20,
+                    size: 16,
                     color: Colors.white,
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 24),
 
-            const SizedBox(height: 32),
-
-            // Full Name
-            _inputField(
-              context,
-              label: "Full Name",
-              hint: "Enter your full name",
-              initialValue: "Josephin",
+            // Name
+            AppTextField(
+              hintText: "Name",
+              prefixIcon: Iconsax.user,
+              controller: controller.nameController,
             ),
+            const SizedBox(height: 16),
 
+            // Mobile
+            AppTextField(
+              hintText: "Mobile",
+              prefixIcon: Iconsax.call,
+              controller: controller.mobileController,
+              keyboardType: TextInputType.phone,
+              suffixIcon: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "CHANGE",
+                  style: textTheme.bodySmall?.copyWith(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
 
             // Email
-            _inputField(
-              context,
-              label: "Email",
-              hint: "Enter your email",
-              initialValue: "josephin@gmail.com",
+            AppTextField(
+              hintText: "Email",
+              prefixIcon: Iconsax.sms,
+              controller: controller.emailController,
               keyboardType: TextInputType.emailAddress,
+              suffixIcon: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "CHANGE",
+                  style: textTheme.bodySmall?.copyWith(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // DOB
+            GestureDetector(
+              onTap:
+                  () => pickDate(
+                    context: context,
+                    controller: controller.dobController,
+                  ),
+              child: AbsorbPointer(
+                child: AppTextField(
+                  hintText: "Date of birth",
+                  prefixIcon: Iconsax.calendar_1,
+                  controller: controller.dobController,
+                  suffixIcon: const Icon(
+                    Iconsax.calendar_1,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Anniversary
+            GestureDetector(
+              onTap:
+                  () => pickDate(
+                    context: context,
+                    controller: controller.anniversaryController,
+                  ),
+              child: AbsorbPointer(
+                child: AppTextField(
+                  hintText: "Anniversary",
+                  prefixIcon: Iconsax.gift,
+                  controller: controller.anniversaryController,
+                  suffixIcon: const Icon(
+                    Iconsax.calendar_1,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
             ),
 
             const SizedBox(height: 16),
 
-            // Phone Number
-            _inputField(
-              context,
-              label: "Phone Number",
-              hint: "Enter your phone number",
-              keyboardType: TextInputType.phone,
+            // Gender
+            AppTextField(
+              hintText: "Gender",
+              prefixIcon: Iconsax.personalcard,
+              controller: controller.genderController,
             ),
 
             const SizedBox(height: 32),
 
-            // Save Button
+            // Update button
           ],
         ),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomButton(
-                text: "Save Change",
-                onPressed: () {
-                  // Save changes logic here
-                },
-              ),
-
-              const SizedBox(height: 12),
-
-              customOutlinedButton(context, text: "Cancel", onTap: () {}),
-            ],
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: CustomButton(text: "Update Profile", onPressed: () {}),
         ),
       ),
     );
   }
+}
+///Date Picker
+Future<void> pickDate({
+  required BuildContext context,
+  required TextEditingController controller,
+}) async {
+  DateTime now = DateTime.now();
 
-  Widget _inputField(
-    BuildContext context, {
-    required String label,
-    required String hint,
-    String? initialValue,
-    TextInputType keyboardType = TextInputType.text,
-  }) {
-    return TextFormField(
-      initialValue: initialValue,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        labelStyle: Theme.of(
-          context,
-        ).textTheme.bodySmall?.copyWith(color: Colors.grey),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 0.8),
+  final DateTime? pickedDate = await showDatePicker(
+    context: context,
+    initialDate: now,
+    firstDate: DateTime(1950),
+    lastDate: DateTime(2100),
+    builder: (context, child) {
+      return Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.light(
+            primary: AppColors.primary900,   // header background
+            onPrimary: Colors.white,         // header text
+            onSurface: Colors.black,         // body text
+          ),
+          dialogBackgroundColor: Colors.white,
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.primary900, // buttons
+            ),
+          ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: BorderSide(color: AppColors.primary900, width: 2),
-        ),
-      ),
-    );
+        child: child!,
+      );
+    },
+  );
+
+  if (pickedDate != null) {
+    controller.text = DateFormat("dd MMM yyyy").format(pickedDate);
   }
 }

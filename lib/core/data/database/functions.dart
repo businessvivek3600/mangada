@@ -24,6 +24,7 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as custom_tabs;
 
 
 
+import '../../constants/colors..dart';
 import '../../constants/value_constant.dart';
 import '../../utils/logger.dart';
 
@@ -91,6 +92,9 @@ exitTheApp() async {
     print('App exit failed!');
   }
 }
+
+
+
 
 // Future<CroppedFile?> cropImage(String path) async {
 //   var context = Get.context!;

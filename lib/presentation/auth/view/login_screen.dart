@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:madhang/presentation/auth/view/register_screen.dart';
+import 'package:go_router/go_router.dart';
+import '../../../routes/route_name.dart';
 import '../../../shared/widgets/app_text_field.dart';
 import '../../../shared/widgets/custom_button.dart';
 
-import '../../main/view/main_screen.dart';
+import '../../main/main_screen.dart';
+import '../controller/auth_controller.dart';
 import 'forgot_passowrd.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,9 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onRegister() {
-    Get.offAll(()=> const MainScreen(),
-        transition: Transition.rightToLeftWithFade,
-        duration: const Duration(milliseconds: 800));
+    final authController = Get.find<AuthController>();
+    authController.login();
+    //context.goNamed(Routes.main);
   }
 
   @override
@@ -106,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextButton(
                     onPressed: () {
                       // 👉 Navigate to Forgot Password Screen
-                 Get.to(() => ForgotPasswordScreen());
+                 context.pushNamed(Routes.forgotPassword);
                       debugPrint("Forgot password tapped");
                     },
                     child: Text(
@@ -188,11 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Get.offAll(
-                          () => RegisterScreen(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: const Duration(milliseconds: 800),
-                        );
+                        context.goNamed(Routes.register);
                       },
                       child:  Text(
                         "Register",

@@ -2,11 +2,12 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import '../../../../constants/enums.dart';
 import '../../../../utils/logger.dart';
 import '../dio_base_index.dart';
 
-class ApiHandler {
+class ApiErrorHandler {
   static String tag = 'ApiErrorHandler';
   static dynamic getMessage(error, {String? endpoint, bool showToast = true}) {
     dynamic errorDescription = "";

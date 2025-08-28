@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:madhang/routes/route_name.dart';
 
 import '../../../core/data/models/food_data_model.dart';
 import '../../../shared/widgets/category_card.dart';
@@ -23,48 +25,50 @@ class CategoryList extends StatelessWidget {
           final cat = categories[index];
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => CategoryScreen(
-                    categoryTitle: cat["label"],
-                    items: [
-                      FoodCardData(
-                        title: "Nasi Rames",
-                        subtitle: "Resto Mbok Ijah",
-                        price: 2.0,
-                        oldPrice: 3.0,
-                        rating: 4.9,
-                        reviews: 115,
-                      ),
-                      FoodCardData(
-                        title: "Nasi Liwet",
-                        subtitle: "Resto Mbok Ijah",
-                        price: 3.0,
-                        oldPrice: 5.0,
-                        rating: 4.9,
-                        reviews: 115,
-                      ),
-                      FoodCardData(
-                        title: "Nasi Pecel Lele",
-                        subtitle: "Resto Idola",
-                        price: 2.0,
-                        oldPrice: 3.0,
-                        rating: 4.9,
-                        reviews: 115,
-                      ),
-                      FoodCardData(
-                        title: "Nasi Bebek Carok",
-                        subtitle: "Carok",
-                        price: 4.0,
-                        oldPrice: 5.0,
-                        rating: 4.9,
-                        reviews: 115,
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              if (cat["label"] == "More") {
+                context.pushNamed(Routes.categoryList);
+              } else {
+                context.pushNamed(
+                  Routes.category,
+                  pathParameters: {
+                    "title": cat["label"], // this fills :title in path
+                  },
+                  extra: [
+                    FoodCardData(
+                      title: "Nasi Rames",
+                      subtitle: "Resto Mbok Ijah",
+                      price: 2.0,
+                      oldPrice: 3.0,
+                      rating: 4.9,
+                      reviews: 115,
+                    ),
+                    FoodCardData(
+                      title: "Nasi Liwet",
+                      subtitle: "Resto Mbok Ijah",
+                      price: 3.0,
+                      oldPrice: 5.0,
+                      rating: 4.9,
+                      reviews: 115,
+                    ),
+                    FoodCardData(
+                      title: "Nasi Pecel Lele",
+                      subtitle: "Resto Idola",
+                      price: 2.0,
+                      oldPrice: 3.0,
+                      rating: 4.9,
+                      reviews: 115,
+                    ),
+                    FoodCardData(
+                      title: "Nasi Bebek Carok",
+                      subtitle: "Carok",
+                      price: 4.0,
+                      oldPrice: 5.0,
+                      rating: 4.9,
+                      reviews: 115,
+                    ),
+                  ],
+                );
+              }
             },
             child: CategoryCard(
               icon: cat["icon"],

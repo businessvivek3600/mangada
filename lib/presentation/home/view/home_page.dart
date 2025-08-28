@@ -63,13 +63,14 @@ class _MyHomePageState extends State<MyHomePage> {
           SliverToBoxAdapter(child: SizedBox(height: size.height * 0.01)),
 
           /// Search Bar
-          SliverToBoxAdapter(child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.04,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+              child: SearchBarWidget(),
             ),
-            child: SearchBarWidget(),
-          )),
+          ),
           SliverToBoxAdapter(child: SizedBox(height: size.height * 0.01)),
+
           /// Categories
           SliverToBoxAdapter(
             child: CategoryList(
@@ -86,21 +87,13 @@ class _MyHomePageState extends State<MyHomePage> {
           SliverToBoxAdapter(
             child: SectionHeader(title: "Recommended For You"),
           ),
-          SliverToBoxAdapter(
-            child: HorizontalListSection(
-              items: items,
-            ),
-          ),
+          SliverToBoxAdapter(child: HorizontalListSection(items: items)),
 
           /// Near You
           SliverToBoxAdapter(child: SectionHeader(title: "Near You")),
-          SliverToBoxAdapter(
-            child: HorizontalListSection(
-              items: items,
-            ),
-          ),
+          SliverToBoxAdapter(child: HorizontalListSection(items: items)),
 
-          SliverToBoxAdapter(child: SizedBox(height: size.height * 0.01)),
+          SliverToBoxAdapter(child: SizedBox(height: size.height * 0.1)),
         ],
       ),
     );

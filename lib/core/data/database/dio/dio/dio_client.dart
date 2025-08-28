@@ -14,7 +14,7 @@ class DioClient {
   final LoggingInterceptor loggingInterceptor;
 
   late Dio dio;
-  // late String token;
+  late String token;
   String? _userToken;
 
   DioClient(this.baseUrl, Dio? dioC, {required this.loggingInterceptor}) {
@@ -44,18 +44,17 @@ class DioClient {
       Headers.contentTypeHeader:
           contentType ?? 'application/json; charset=UTF-8',
       if (token != null) HttpHeaders.authorizationHeader: 'Bearer $token',
-      'x-api-key': 'BRIGTFUTURE@1234',
     };
     log('updateUserToken : ${dio.options.headers}');
   }
 
-  // void updateUserToken(String? userToken) {
-  //   _userToken = userToken ?? _userToken;
-  //   dio.options.headers.update(
-  //       HttpHeaders.authorizationHeader, (val) => 'Bearer $_userToken',
-  //       ifAbsent: () => 'Bearer $_userToken');
-  //   log('updateUserToken : ${dio.options.headers}');
-  // }
+  void updateUserToken(String? userToken) {
+    _userToken = userToken ?? _userToken;
+    dio.options.headers.update(
+        HttpHeaders.authorizationHeader, (val) => 'Bearer $_userToken',
+        ifAbsent: () => 'Bearer $_userToken');
+    log('updateUserToken : ${dio.options.headers}');
+  }
 
   Future<Response> get(
     String uri, {
