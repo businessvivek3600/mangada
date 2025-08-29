@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'core/data/database/dio/dio/dio_client.dart';
 import 'core/data/database/dio/dio/logging_interceptor.dart';
 import 'core/services/theme_service.dart';
+import 'presentation/auth/controller/auth_controller.dart';
 import 'routes/route_settings.dart';
 
 late DioClient dioClient;
@@ -21,6 +22,7 @@ void main() async {
   Get.put<DioClient>(dioClient);
   // Request location permission at startup
   await _requestPermissions();
+  final AuthController authController = Get.put(AuthController());
   runApp(const MyApp());
 }
 

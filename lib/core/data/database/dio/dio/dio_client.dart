@@ -28,7 +28,7 @@ class DioClient {
       ..httpClientAdapter
       ..options.headers = {
         Headers.contentTypeHeader: 'application/json',
-        Headers.acceptHeader: '*/*',
+        Headers.acceptHeader: 'application/json',
       }
       ..options.responseType = ResponseType.json;
     dio.interceptors.add(loggingInterceptor);
@@ -40,7 +40,7 @@ class DioClient {
     // token = token ?? this.token;
     // this.token = token;
     dio.options.headers = {
-      Headers.acceptHeader: '*/*',
+     Headers.acceptHeader: 'application/json',
       Headers.contentTypeHeader:
           contentType ?? 'application/json; charset=UTF-8',
       if (token != null) HttpHeaders.authorizationHeader: 'Bearer $token',
@@ -86,44 +86,33 @@ class DioClient {
   }
 
   Future<Response> post(
-    String uri, {
-    Object? data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    CancelToken? cancelToken,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-    bool token = true,
-  }) async {
+      String uri, {
+        Object? data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onSendProgress,
+        ProgressCallback? onReceiveProgress,
+        bool token = true,
+      }) async {
     try {
       CancelToken cancelToken = CancelToken();
-      FormData formData = FormData();
-      if (data is Map<String, dynamic>) {
-        formData.fields
-            .addAll(data.entries.toList().map((e) => MapEntry(e.key, e.value)));
-      } else {
-        if (data == null) {
-          formData = FormData();
-        } else {
-          formData = data as FormData;
-        }
-      }
-      ///-----------Pass token in form data if required----------------
-      // if (token) {
-      //   formData.fields.add(MapEntry('login_token', appStore.token));
-      //
-      // }
 
-      pl('formdata :${formData.fields} ${dio.options.headers}', 'DIO CLIENT');
+      final fullUrl = "${dio.options.baseUrl}$uri"
+          "${queryParameters != null ? "?${Uri(queryParameters: queryParameters).query}" : ""}";
+
       var response = await dio.post(
         uri,
-        data: formData,
+        data: data, // ✅ send JSON instead of FormData
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
+      // ✅ Print response details
+      log("✅ Response (${response.statusCode}) from $fullUrl");
+      log("   Data       : ${response.data}");
       return response;
     } catch (e) {
       rethrow;

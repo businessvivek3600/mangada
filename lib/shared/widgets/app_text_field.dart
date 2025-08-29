@@ -8,7 +8,10 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final FormFieldValidator<String>? validator;
-
+final AutovalidateMode? autovalidateMode;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
   const AppTextField({
     super.key,
     required this.hintText,
@@ -17,7 +20,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.keyboardType = TextInputType.text,
-    this.validator,
+    this.validator,  this.autovalidateMode, this.focusNode, this.textInputAction, this.onFieldSubmitted,
   });
 
   @override
@@ -29,6 +32,10 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
+      autovalidateMode: autovalidateMode,
+      focusNode: focusNode,
+      textInputAction: textInputAction,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: theme.textTheme.bodyLarge?.copyWith(color: Colors.grey),

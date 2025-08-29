@@ -634,3 +634,46 @@ const GOOGLE_MAP_PREFIX = 'https://www.google.com/maps/search/?api=1&query=';
 
 SlideConfiguration sliderConfigurationGlobal =
     SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds);
+
+
+class Validators {
+  /// Validate email format
+  static String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Email is required";
+    }
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegex.hasMatch(value)) {
+      return "Enter a valid email";
+    }
+    return null;
+  }
+
+  /// Validate password for login (only empty check)
+  static String? validateLoginPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Password is required";
+    }
+    return null;
+  }
+
+  /// Validate password for signup
+  static String? validateSignupPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Password is required";
+    }
+    if (value.length < 8) {
+      return "Password must be at least 8 characters";
+    }
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return "Password must contain at least 1 uppercase letter";
+    }
+    if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return "Password must contain at least 1 number";
+    }
+    if (!RegExp(r'[!@#\$&*~%^,.?_-]').hasMatch(value)) {
+      return "Password must contain at least 1 special character";
+    }
+    return null;
+  }
+}

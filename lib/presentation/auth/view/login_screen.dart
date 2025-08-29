@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/data/database/functions.dart';
 import '../../../routes/route_name.dart';
 import '../../../shared/widgets/app_text_field.dart';
 import '../../../shared/widgets/custom_button.dart';
@@ -19,19 +20,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+final AuthController  authController = Get.find<AuthController>();
 
   void _onRegister() {
-    final authController = Get.find<AuthController>();
-    authController.login();
+    authController.login( context);
     //context.goNamed(Routes.main);
   }
 
@@ -63,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 /// Email Field
                 AppTextField(
-                  controller: _emailController,
+                  controller: authController.emailController,
                   hintText: "Enter your email",
                   prefixIcon: Icons.email_outlined,
                   keyboardType: TextInputType.emailAddress,
@@ -83,25 +75,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
 
                 /// Password Field
-                AppTextField(
-                  controller: _passwordController,
-                  hintText: "Password",
-                  prefixIcon: Icons.vpn_key_outlined,
-                  obscureText: true,
-                  suffixIcon: const Icon(
-                    Icons.visibility_off_outlined,
-                    color: Colors.grey,
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Password is required";
-                    }
-                    if (value.length < 6) {
-                      return "Password must be at least 6 characters";
-                    }
-                    return null;
-                  },
-                ),
+                Obx(() {
+
+                  return AppTextField(
+                    controller:authController.passwordController,
+                    hintText: "Password",
+                    prefixIcon: Icons.vpn_key_outlined,
+                    obscureText: authController.isPasswordHidden.value, // 👀 reactive toggle
+                    textInputAction: TextInputAction.done,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        authController.isPasswordHidden.value
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: Colors.grey,
+                      ),
+                      onPressed: authController.togglePasswordVisibility, // 🔄 toggle
+                    ),
+                    validator: Validators.validateLoginPassword,
+                    onFieldSubmitted: (_) => _onRegister(),
+                  );
+                }),
                 // 🔹 Forgot Password button
                 Align(
                   alignment: Alignment.centerRight,

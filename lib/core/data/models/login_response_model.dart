@@ -1,28 +1,51 @@
-import 'user_data_model.dart';
+import 'package:madhang/core/data/models/user_data_model.dart';
 
-class LoginResponseModel {
+class LoginResponse {
   final bool status;
   final String message;
-  final UserData? userData;
-  final String? sessionToken;
+  final LoginData data;
 
-  LoginResponseModel({
+  LoginResponse({
     required this.status,
     required this.message,
-    this.userData,
-    this.sessionToken,
+    required this.data,
   });
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    return LoginResponseModel(
-      status: json['status'] ?? false,
-      message: json['message'] ?? '',
-      userData: json['data'] != null
-          ? UserData.fromJson(json['data']['user_data'])
-          : null,
-      sessionToken: json['data']?['session_token'],
-    );
-  }
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
+    status: json["status"] ?? false,
+    message: json["message"] ?? "",
+    data: LoginData.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "message": message,
+    "data": data.toJson(),
+  };
 }
+
+class LoginData {
+  final UserData userData;
+  final String sessionToken;
+
+  LoginData({
+    required this.userData,
+    required this.sessionToken,
+  });
+
+  factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
+    userData: UserData.fromJson(json["user_data"]),
+    sessionToken: json["session_token"] ?? "",
+  );
+
+  Map<String, dynamic> toJson() => {
+    "user_data": userData.toJson(),
+    "session_token": sessionToken,
+  };
+}
+
+
+
+
 
 
